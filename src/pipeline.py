@@ -52,10 +52,20 @@ def pull_api(url):
 
     try:
         response = requests.get(url)
-        response.raise_for_status
+        response.raise_for_status()
         return response.json()
-    except
-
+    except requests.exceptions.ConnectionError:
+        logger.error("Connection error while retrieving %s", url)
+        return None
+    except requests.exceptions.Timeout:
+        logger.error("Timeout while retrieving %s", url)
+        return None
+    except requests.exceptions.HTTPError as e:
+        logger.error("HTTP error while retrieving %s: %s", url, e)
+        return None
+    except ValueError:
+        logger.error("Failed to parse JSON from %s", url)
+        return None
 
 
 def run_pipeline(config_filepath):
@@ -64,9 +74,7 @@ def run_pipeline(config_filepath):
     config = load_config(config_filepath)
     users = pull_api(config['users_url'])
     transactions = pull_api(config['transactions_url'])
-
-
-
+    
 
 
 if __name__ == "__main__":
