@@ -52,10 +52,11 @@ def pull_api():
         users = config['users_url']
 
 
-def run_pipeline():
+def run_pipeline(config_filepath):
 
     setup_logging()
     config = load_config(config_filepath)
+    
 
 
 if __name__ == "__main__":
