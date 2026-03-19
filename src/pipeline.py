@@ -46,17 +46,19 @@ def load_config(config_filepath):
 
     return config
 
-def pull_api(config):
+def pull_users_api(config):
 
 
         users = config['users_url']
+
+def 
 
 
 def run_pipeline(config_filepath):
 
     setup_logging()
     config = load_config(config_filepath)
-    
+
 
 
 
