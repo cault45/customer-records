@@ -21,3 +21,6 @@ transform.py
 def setup_logging():
 
     logger.setLevel(logging.INFO)
+    console_handler = logging.StreamHandler()
+    file_handler = logging.FileHandler("logs/pipeline.log", mode='a', encoding='utf-8',
+                                       datefmt="%Y-%m-%d %H:%M:%S")
