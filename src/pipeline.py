@@ -58,6 +58,9 @@ def run_pipeline(config_filepath):
 
     setup_logging()
     config = load_config(config_filepath)
+    users = pull_api(config['users_url'])
+    transactions = pull_api(config['transactions_url'])
+    
 
 
 
