@@ -52,8 +52,9 @@ def pull_api(url):
 
     try:
         response = requests.get(url)
+        response = response.json()
         logger.info("Successfully connected to data source")
-    except 
+    except
 
 
 
