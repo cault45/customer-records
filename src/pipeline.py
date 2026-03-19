@@ -31,10 +31,10 @@ def setup_logging():
     logger.addHandler(file_handler)
 
 
-def
+def pull_api():
 
 
 def run_pipeline():
 
     setup_logging()
-    
+
