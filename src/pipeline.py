@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import logging
 import sys
+import requests
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -49,7 +51,7 @@ def load_config(config_filepath):
 def pull_api(url):
 
     try:
-        users = ['users_url']
+        response = requests.get(url)
 
 
 
