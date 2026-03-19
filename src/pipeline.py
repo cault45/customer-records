@@ -35,4 +35,6 @@ def
 
 
 def run_pipeline():
+
+    setup_logging()
     
