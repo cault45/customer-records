@@ -52,7 +52,8 @@ def pull_api(url):
 
     try:
         response = requests.get(url)
-        logger.info(")
+        logger.info("Successfully connected to data source")
+    except 
 
 
 
