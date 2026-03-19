@@ -34,7 +34,7 @@ def setup_logging():
 def pull_api():
 
     try:
-        users = 
+        users = config['users_url']
 
 
 def run_pipeline():
