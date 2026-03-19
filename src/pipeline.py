@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import logging
+import sys
 
 logger = logging.getLogger(__name__)
 
@@ -31,13 +32,36 @@ def setup_logging():
     logger.addHandler(file_handler)
 
 
-def pull_api():
+def load_config(config_filepath):
 
     try:
+        with open(config_filepath, 'r') as c
+        config = json.load(c)
+    except FileNotFoundError:
+        logger.info("json file not found")
+        sys.exit(1)
+    except json.JSONDecodeError:
+        logger.info("Error detected in json file")
+        sys.exit(1)
+
+    return config
+
+def pull_api():
+
+
         users = config['users_url']
 
 
 def run_pipeline():
 
     setup_logging()
+    config = load_config(config_filepath)
+
+
+if __name__ == "__main__":
+
+     if len(argv) != 2:
+          print("Missing/Incorrect number of command line arguments")
+          sys.exit(1)
+     run_pipeline(sys.argv[1])
 
