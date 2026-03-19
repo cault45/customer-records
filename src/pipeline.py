@@ -52,6 +52,7 @@ def pull_api(url):
 
     try:
         response = requests.get(url)
+        logger.info(")
 
 
 
