@@ -46,12 +46,11 @@ def load_config(config_filepath):
 
     return config
 
-def pull_api(config):
+def pull_api(url):
 
+    try:
+        users = ['users_url']
 
-        users = config['users_url']
-
-def
 
 
 def run_pipeline(config_filepath):
@@ -60,7 +59,7 @@ def run_pipeline(config_filepath):
     config = load_config(config_filepath)
     users = pull_api(config['users_url'])
     transactions = pull_api(config['transactions_url'])
-    
+
 
 
 
