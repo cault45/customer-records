@@ -33,7 +33,9 @@ def setup_logging():
 
 def pull_api():
 
-    
+    try:
+        users = 
+
 
 def run_pipeline():
 

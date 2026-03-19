@@ -1,0 +1,5 @@
+{
+    "users_url" : "https://jsonplaceholder.typicode.com/users",
+    "transaction_url": "https://jsonplaceholder.typicode.com/posts",
+    "log_filepath": "logs/pipeline.log"
+}
