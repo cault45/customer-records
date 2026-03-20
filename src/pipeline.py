@@ -28,8 +28,8 @@ def setup_logging():
     file_handler = logging.FileHandler("logs/pipeline.log", mode='a', encoding='utf-8')
     formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s",
                                   datefmt="%Y-%m-%d %H:%M:%S")
-    console_handler = setFormatter(formatter)
-    file_handler = setFormatter(formatter)
+    console_handler.setFormatter(formatter)
+    file_handler.setFormatter(formatter)
     logger.addHandler(console_handler)
     logger.addHandler(file_handler)
 
@@ -37,8 +37,8 @@ def setup_logging():
 def load_config(config_filepath):
 
     try:
-        with open(config_filepath, 'r') as c
-        config = json.load(c)
+        with open(config_filepath, 'r') as c:
+            config = json.load(c)
     except FileNotFoundError:
         logger.info("json file not found")
         sys.exit(1)
@@ -74,12 +74,14 @@ def run_pipeline(config_filepath):
     config = load_config(config_filepath)
     users = pull_api(config['users_url'])
     transactions = pull_api(config['transactions_url'])
-    
+    print(transactions)
+
+    users_clean, transactions_clean = clean(users, transactions)
 
 
 if __name__ == "__main__":
 
-     if len(argv) != 2:
+     if len(sys.argv) != 2:
           print("Missing/Incorrect number of command line arguments")
           sys.exit(1)
      run_pipeline(sys.argv[1])
