@@ -4,6 +4,10 @@ import logging
 import sys
 import requests
 import json
+import os
+sys.path.append(os.path.dirname(__file__))
+import clean
+import transform
 
 logger = logging.getLogger(__name__)
 
@@ -74,10 +78,10 @@ def run_pipeline(config_filepath):
     config = load_config(config_filepath)
     users = pull_api(config['users_url'])
     transactions = pull_api(config['transactions_url'])
-    print(transactions)
+    
+    users_clean, users_rejected, transactions_clean, transactions_rejected = clean.clean(users, transactions)
 
-    users_clean, transactions_clean = clean(users, transactions)
-
+    data_transformed = transform.transform(users_clean, transactions_clean)
 
 if __name__ == "__main__":
 
