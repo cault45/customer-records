@@ -1,6 +1,6 @@
 
 
-def clean_data(users, transactions):
+def clean_data(users: , transactions):
 
     df_users = pd.DataFrame(users)
     df_transactions = pd.DataFrame(transactions)
