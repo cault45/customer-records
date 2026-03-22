@@ -72,16 +72,22 @@ def pull_api(url):
         return None
 
 
+
+
+
+
 def run_pipeline(config_filepath):
 
     setup_logging()
     config = load_config(config_filepath)
     users = pull_api(config['users_url'])
     transactions = pull_api(config['transactions_url'])
-    
+
     users_clean, users_rejected, transactions_clean, transactions_rejected = clean.clean(users, transactions)
 
     data_transformed = transform.transform(users_clean, transactions_clean)
+
+    df_sum = transform.summarise(data_transformed)
 
 if __name__ == "__main__":
 

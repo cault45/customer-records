@@ -4,10 +4,21 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+def parse_users(df: pd.DataFrame) -> pd.DataFrame:
+
+    df['city'] = df['address'].apply(lambda x: x['city'])
+
+    return df
+
+
 def clean(users: str, transactions: str) -> tuple:
 
     df_users = pd.DataFrame(users)
     df_transactions = pd.DataFrame(transactions)
+
+    df_users = parse_users(df_users)
+
+    print(df_users)
 
     df_users['rejection_reason'] = np.where(
         (df_users['email'].str.contains('@')) &
@@ -48,9 +59,6 @@ def clean(users: str, transactions: str) -> tuple:
     df_users = df_users.drop('rejection_reason', axis='columns')
     df_transactions = df_transactions.drop('rejection_reason', axis='columns')
 
-
-
-
     df_users = df_users.reset_index(drop=True)
     df_users_rejected = df_users_rejected.reset_index(drop=True)
 
@@ -67,4 +75,8 @@ def clean(users: str, transactions: str) -> tuple:
 
 
     return df_users, df_users_rejected, df_transactions, df_transactions_rejected
+
+
+
+
 
