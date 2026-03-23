@@ -11,28 +11,26 @@ def parse_users(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def clean(users: str, transactions: str) -> tuple:
+def clean(users: list, transactions: list) -> tuple:
 
     df_users = pd.DataFrame(users)
     df_transactions = pd.DataFrame(transactions)
 
     df_users = parse_users(df_users)
 
-    print(df_users)
-
-    df_users['rejection_reason'] = np.where(
-        (df_users['email'].str.contains('@')) &
-        (df_users['email'].str.contains('.', regex=False)),
-        None,
-        "Invalid email format"
-    )
-
     df_users['rejection_reason'] = np.where(
         (df_users['id'].isnull()) |
         (df_users['name'].isnull()) |
         (df_users['email'].isnull()),
         "NULL value found in key column",
-        df_users['rejection_reason']
+        None
+    )
+
+    df_users['rejection_reason'] = np.where(
+        (df_users['email'].str.contains('@')) &
+        (df_users['email'].str.contains('.', regex=False)),
+        df_users['rejection_reason'],
+        "Invalid email format"
     )
 
     df_transactions['rejection_reason'] = np.where(
@@ -74,7 +72,7 @@ def clean(users: str, transactions: str) -> tuple:
 
 
 
-    return df_users, df_users_rejected, df_transactions, df_transactions_rejected
+    return df_users, df_users_rejected, df_transactions
 
 
 

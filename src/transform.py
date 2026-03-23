@@ -28,12 +28,12 @@ def summarise(df: pd.DataFrame) -> pd.DataFrame:
 
     df = df.groupby(['city']).agg(
         total_customers_per_city=('id_x', 'nunique'),
-        avg_trans=('row_count', lambda x: round(x.mean(), 2)),
+        avg_transactions_per_customer=('row_count', lambda x: round(x.mean(), 2)),
         high_count=('customer_segment', lambda x: (x == 'HIGH').sum()),
         mid_count=('customer_segment', lambda x: (x == 'MID').sum()),
         low_count=('customer_segment', lambda x: (x == 'LOW').sum())
     )
 
-    df = df.reset_index(drop=True)
+    df = df.reset_index()
 
     return df
